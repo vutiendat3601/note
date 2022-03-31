@@ -1,0 +1,17 @@
+Spring Core:
+	- The starting point
+	- All Spring applications use core libraries and extensions
+
+Constructor Drawback:
+	- Hard code and High coupling (Dependence)
+	- Complex APIs with long constructors
+	-> IoC is solution
+
+IoC (Inversion of Control):
+	- IoC means that objects do not create other objects on which they rely to do their work
+	- Instead, they get the objects that they need from an outside source
+	- DI (Dependency Injection):
+		+ is a form of IoC, where implementations  are passed into an object through constructors/setters/service lookups (namespace/configuration)
+		+ IoC container is a specific kind of DI 
+		+ DI is a specific kind of IoC
+	

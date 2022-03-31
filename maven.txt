@@ -1,0 +1,69 @@
+Maven:
+	- A build automation tool used primarily for Java projects base on the concept of a project object model (POM)
+	- Maven describes how projects are built, and it describes project dependencies
+	- Maven dynamically downloads Java libraries and Maven plug-ins from local and remote repositories
+	- Maven allows the development team focusing on the business code instead of configuration and dependencies
+
+JAR:
+	- JAR is a zip format include .class files
+	- Used in Runtime without compiling files
+	- Used as executable and runnable files
+	- Used as libraries (Security, extendable, flexible)
+
+Java build tools:
+	- Maven
+	- Gradle (Google)
+	- Apache Ant
+
+Create maven Java project:
+	- Command line:
+		mvn archetype:generate
+		mvn archetype:generate -DgroupId={project-packaging} -DartifactId={project-name} -DarchetypeArtificalId=Archetype -DinteractiveMode=false
+
+POM file:
+	- attributes:
+		+ project name
+		+ project dependencies
+		+ plugins
+		+ goals
+		+ build profiles
+		+ project version
+		+ reporisitories
+		+ packaging
+
+Build Lifecycle:
+	- The process for building and distributing a particular artifact (project) based on goals
+	- A goal represents a specific task
+	- There are 3 built-in build lifecycles: default, clean and site
+	- Common Maven build lifecycle:
+		+ validate
+		+ clean (remove class file)
+			mvn clean
+		+ compile (compile java files)
+			mvn compile
+		+ test
+		+ package
+		+ verify
+		+ install
+		+ deploy
+
+Maven plugins:
+	- Maven is a plugin executation framework, all work is done by plugins
+	- Build plugins/reporting plugins
+	- Task with maven plugins available:
+		+ Create jar file
+		+ Create war file
+		+ Compile code files
+		+ Unit testing of code
+		+ Create project documentation
+		+ Create project reports
+
+Connect tomcat docker:
+	docker pull tomcat:9.0
+	docker run -itd -p 8080:8080 tomcat:9.0
+	docker exec -it [container-name] bash
+	cp -r ./webapps.dist/manager ./webapps
+	[comment  <!-- <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+  allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> --> in manager/META-INF/context.xml]
+  	setup role
+  	

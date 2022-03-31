@@ -1,0 +1,15 @@
+Generic ok
+Reflaction ok
+Class: Map, Set, List ok
+Token: ....
+JSON
+Network
+
+Database
+Stream
+Interface: 
+Các design parttern 
+MonoThick (microservices monolithnic)
+
+Tool backend:
+	Swagger(package), Postman (pm)

@@ -1,0 +1,159 @@
+Hibernate:
+	- 
+
+ORM (Object Relational Mapping):
+	- Converting between data records in RDBMS and object in (object-oriented) programming language
+	- ORM is a specification
+	- There are various ORM implementations
+	- Hibernate is the most popular ORM framework in Java
+
+JPA (Java Persistence API):
+	- One approach ORM
+	- Can map, store, update and retrieve data from relational databases to Java objects and vice versa
+	- Hibernate is one popular JPA implementation
+
+Advantages:
+	- Productivity
+	- Maintainability
+	- Portability
+	- Database independent
+	- Code generation tool
+	- Advantages of OOP concepts
+	- Caching mechanism
+	- Connection Pooling
+	- Lazy loading
+	- Free cost effective
+
+Disadvantages:
+	- Slower than JDBC
+	- Not suitable for batch processing
+	- Lots of API to learn
+
+Configuration:
+	- Driver:
+		+ In hibernate, using JDBC driver is a software component enabling a Java application to interact with a database
+		+ Every database has its own driver class
+		+ Every database driver needs to implement the Driver interface
+
+	- Dialect:
+		+ Means the variant of a language
+		+ Each database has native SQL variations and SQL standard implementations
+		+ Dialect class allows Hibernate to generate optimized and appropriate SQL statements for the chosen database
+
+	- Account:
+		+ User -> the login user name defined in the DBMS server
+		+ Password -> the password for the login user
+
+	- URL:
+		+ In Hibernate, URL is JDBC url
+		+ URLs could contain user and password
+
+	- Show SQL:
+		+ Write all SQL statements to console
+		Used to display SQL generated in Hibernate (Development, Debug, Maintain, Error fixing)
+
+	- hbm2ddl.auto:
+		+ hibernate mapping to create schema DDL (Data Definition Language) -> work with schemas
+		+ none (default value): do nothing
+		+ validate: validate the schema, makes no changes to the database
+		+ update: update the schema
+		+ create: creates the schema, destroying previous data
+		+ create-drop: drop the schema when the SessionFactory is closed explicitly, typically when the application is stopped
+
+SessionFactory:
+	- A class implement Factory Design Parttern
+	- To create Session instances
+	- Usually an application has a single SessionFactory object
+	- Some methods:
+		openSession(), close()
+Session:
+	- Session is an interface
+	- The main runtime interfae between a Java application and Hibernate
+	- Use for CRUD
+	- The lifecycle of a Session is bounded by the beginning and end of a logical transaction
+Create SessionFactory:
+	- Hibernate 3.x:
+		SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	- Hibernate 4.x:
+		ServiceRegistry sr = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+		SessionFactory sf = configuration.buildSessionFactory(serviceRegistry);
+
+Object state:
+	- Transient
+		+ Newly created objects (using constructors)
+		+ Not associated with a Hibernate Session
+		+ No persistent representation in the datbase
+
+	- Persistent
+		+ Has a representation in the database and an identifier value
+		+ Be saved or loaded in the scope of a Session
+
+	- Detached
+		+ Objects that have been persistent, but its Session has been closed
+
+Annotations:
+	@Entity (class level) -> Required
+		+ name: used in JPA queries
+	@Table (class level) -> Optional
+		+ name: created in the database
+
+	PrimaryKey (Unique, not null, only one per table):
+	@Id: Mark a column(s) as the primary key
+	@GeneratedValue: auto increase attribute values
+		+ strategy =GenerationType
+		GenerationType:
+			+ AUTO:
+				default
+				Hibernate will choose the generation strategy
+			+ ENTITY:
+				Generated values are unique only per type hierarchy
+			+ SEQUENCE:
+				Define a named sequence
+				Used by one or more fields in one or more classes
+			+ TABLE:
+				Per table
+
+	@Column
+		+ name
+		+ nullable
+		+ length
+		+ unique
+
+	@Transient: only use the class var in Java, not map to database
+
+	@Temporal: use to handle DateTime
+
+	@Embedded, @Embeddable: use to add a composition class attributes
+
+	@ElementCollection: use to store a collection in class attribute
+
+Proxy Object:
+	- Generated at runtime
+	- Extends the original entity class
+	- Delegates the call to the original entity to get normal attributes
+	- To hide the lazy association initialization (For collection)
+
+LazyLoading (ProxyObject): fetch when need
+EagerLoading (ProxyObject): always fetch
+
+One-To-One: 
+	- A record in table A is associated with one and only one record in table B
+	- One-To-One use foreign keys to join tables
+
+One-To-Many:
+	- A record in table A is associated with many records in table B. A record in table B is  associated with one record in table A
+	-> A One-To-Many B & B Many-To-One A
+	- Use join table to store the mapping value
+	- Should consider roles of A and B to put the relationship marker
+
+Many-To-Many:
+	- a record in table A is associated with many records in table B
+	- a record in table B is associated with many records in table A
+	- Use join table to store the mapping values
+
+HQL (Hibernate Query Language):
+	- SQL operates on table and columns
+	- HQL works with persistent objects and their properties
+	- HQL queries are translated by Hibernate into conventional SQL queries
+	- Advantage of Hibernate's SQL generation and caching strategies
+	
