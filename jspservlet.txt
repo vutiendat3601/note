@@ -1,0 +1,2 @@
+* What does your web server do?
+- A web server takes a client request and gives something back to the client.
